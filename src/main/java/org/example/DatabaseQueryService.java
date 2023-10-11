@@ -128,8 +128,5 @@ public class DatabaseQueryService {
 }
 
 
-//    executeUpdate можна помістити в окремий клас
-//    також в цей клас додати метод executeQuery який буде мати логіку ( st.executeQuery())
-//        концептуально він  схожий на executeUpdate()
-//        find_youngest_eldest_workers()  не вірно. sql він має зчитувати з файлу
+
 
