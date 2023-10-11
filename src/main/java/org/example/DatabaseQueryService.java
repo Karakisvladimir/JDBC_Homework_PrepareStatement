@@ -99,7 +99,7 @@ public class DatabaseQueryService {
         List<YoungestEldestWorkers> result = new ArrayList<>();
 
         try {
-            String sql = Files.readString(Path.of("./sql/find_youngest_eldest_workers.sql"));
+            String sql = Files.readString(Path.of(Prefs.SELECT_YOUNGEST_ELDEST));
 
 
             try (Statement statement = database.getConnection().createStatement();
