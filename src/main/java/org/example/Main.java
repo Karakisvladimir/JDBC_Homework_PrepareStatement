@@ -9,6 +9,6 @@ public class Main {
         databaseQueryService.find_longest_project();
         databaseQueryService.find_max_projects_client();
         databaseQueryService.find_max_salary_worker();
-        databaseQueryService.find_youngest_eldest_workers();
+        System.out.println("FindYoungestEldestWorkers() = " + databaseQueryService.findYoungestEldestWorkers());
     }
 }

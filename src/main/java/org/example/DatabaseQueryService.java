@@ -1,10 +1,13 @@
 package org.example;
 
-import java.sql.Date;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseQueryService {
     private Database database;
@@ -51,12 +54,13 @@ public class DatabaseQueryService {
 
 
     }
-    public void find_max_projects_client(){
+
+    public void find_max_projects_client() {
         try (Statement st = database.getConnection().createStatement()) {
             String sql = "SELECT c.name, COUNT(p.client_id) AS projects_client FROM client c \n" +
-            "JOIN project p ON p.client_id = c.id\n" +
-            "GROUP BY client_id\n" +
-            "HAVING projects_client = (\n" +
+                    "JOIN project p ON p.client_id = c.id\n" +
+                    "GROUP BY client_id\n" +
+                    "HAVING projects_client = (\n" +
                     "SELECT MAX(proj) FROM (\n" +
                     "SELECT COUNT(client_id) AS proj\n" +
                     "FROM project\n" +
@@ -76,7 +80,7 @@ public class DatabaseQueryService {
         }
     }
 
-public  void find_max_salary_worker(){
+    public void find_max_salary_worker() {
 
 
         try (Statement st = database.getConnection().createStatement()) {
@@ -90,38 +94,42 @@ public  void find_max_salary_worker(){
             throwables.printStackTrace();
         }
     }
-    public void find_youngest_eldest_workers() {
-        try (Statement st = database.getConnection().createStatement()) {
-            try (ResultSet rs = st.executeQuery("SELECT 'YOUNGEST' AS type, name, birthday\n" +
-                    "FROM worker\n" +
-                    "WHERE birthday= (SELECT MAX(birthday) FROM worker)\n" +
-                    "UNION ALL\n" +
-                    "SELECT 'OLDEST' AS type, name, birthday\n" +
-                    "FROM worker\n" +
-                    "WHERE birthday= (SELECT MIN(birthday) FROM worker);")) {
-                while (rs.next()) {
-                    String type = rs.getString("type");
-                    String name = rs.getString("name");
-                    Date birthday = rs.getDate("birthday");
 
-                    System.out.println(type + ": " + name + " (" + birthday + ")");
+    public <YoungestEldestWorkers> List<YoungestEldestWorkers>  findYoungestEldestWorkers() {
+        List<YoungestEldestWorkers> result = new ArrayList<>();
+
+        try {
+            String sql = Files.readString(Path.of("./sql/find_youngest_eldest_workers.sql"));
+
+
+            try (Statement statement = database.getConnection().createStatement();
+                 ResultSet resultSet = statement.executeQuery(sql)) {
+
+                while (resultSet.next()) {
+                    String type = resultSet.getString("type");
+                    String name = resultSet.getString("name");
+                    String birthday = resultSet.getString("birthday");
+
+                    YoungestEldestWorkers worker = new YoungestEldestWorkers(type, name, birthday);
+
+                    result.add(worker);
                 }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return result;
     }
 
 
-    public static void main(String[] args) {
-        Database database = Database.getInstance();
-
-        DatabaseQueryService databaseQueryService = new DatabaseQueryService(database);
-        //databaseQueryService.printNameClient();
-        //databaseQueryService.find_longest_project();
-        // databaseQueryService.find_max_projects_client();
-        //databaseQueryService.find_max_salary_worker();
-        databaseQueryService.find_youngest_eldest_workers();
-    }
 }
+
+
+//    executeUpdate можна помістити в окремий клас
+//    також в цей клас додати метод executeQuery який буде мати логіку ( st.executeQuery())
+//        концептуально він  схожий на executeUpdate()
+//        find_youngest_eldest_workers()  не вірно. sql він має зчитувати з файлу
 
