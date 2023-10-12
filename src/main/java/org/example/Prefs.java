@@ -15,6 +15,7 @@ public class Prefs {
     public static final String INIT_DB_SQL_POPULATE_DB = "sqlpopulate";
     public static final String DEFAULT_PREFS_FILENAME = "prefs.json";
     public static final String SELECT_YOUNGEST_ELDEST = "sqlyoung";
+    public static final String PRINT_PROJECT_PRICES ="printProjectPrices";
     private Map<String, Object> prefs = new HashMap<>();
 
     public Prefs() {

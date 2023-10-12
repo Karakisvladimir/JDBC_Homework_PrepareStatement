@@ -5,10 +5,14 @@ public class Main {
         Database database = Database.getInstance();
 
         DatabaseQueryService databaseQueryService = new DatabaseQueryService(database);
-        databaseQueryService.printNameClient();
-        databaseQueryService.find_longest_project();
-        databaseQueryService.find_max_projects_client();
-        databaseQueryService.find_max_salary_worker();
-        System.out.println("FindYoungestEldestWorkers() = " + databaseQueryService.findYoungestEldestWorkers());
+        System.out.println("databaseQueryService.printProjectPrices() = " + databaseQueryService.printProjectPrices());
+        System.out.println("databaseQueryService.findLongestProject() = " + databaseQueryService.findLongestProject());
+        System.out.println("databaseQueryService.findMaxSalaryWorker() = " + databaseQueryService.findMaxSalaryWorker());
+        System.out.println("databaseQueryService.findMaxProjectsClient() = " + databaseQueryService.findMaxProjectsClient());
+        // I have print in the methods
+        databaseQueryService.printProjectPrices();
+        databaseQueryService.findYoungestEldestWorkers();
     }
 }
+
+
