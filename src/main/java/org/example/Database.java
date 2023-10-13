@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 
 public class Database {
     private static final Database INSTANCE = new Database();
-    private Connection connection;
+    private static Connection connection;
 
     private Database() {
         try {
@@ -23,7 +23,7 @@ public class Database {
     }
 
 
-    public Connection getConnection() {
+    public static Connection getConnection() {
         return connection;
     }
 
