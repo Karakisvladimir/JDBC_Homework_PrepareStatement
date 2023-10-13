@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -25,8 +26,8 @@ public class DatabaseQueryService {
         try {
             String sql = Files.readString(Path.of("./sql/find_max_salary_worker.sql"));
 
-            try (Statement statement = database.getConnection().createStatement();
-                 ResultSet resultSet = statement.executeQuery(sql)) {
+            try (PreparedStatement ps = database.getConnection().prepareStatement(sql);
+                 ResultSet resultSet = ps.executeQuery()) {
 
                 while (resultSet.next()) {
                     String name = resultSet.getString("name");
@@ -53,8 +54,8 @@ public class DatabaseQueryService {
 
             String sql = Files.readString(Path.of("./sql/find_max_projects_client.sql"));
 
-            try (Statement statement = database.getConnection().createStatement();
-                 ResultSet resultSet = statement.executeQuery(sql)) {
+            try (PreparedStatement ps = database.getConnection().prepareStatement(sql);
+                 ResultSet resultSet = ps.executeQuery())  {
 
                 while (resultSet.next()) {
                     String name = resultSet.getString("name");
@@ -80,8 +81,8 @@ public class DatabaseQueryService {
             String sql = Files.readString(Path.of("./sql/find_longest_project.sql"));
 
 
-            try (Statement statement = database.getConnection().createStatement();
-                 ResultSet resultSet = statement.executeQuery(sql)) {
+            try (PreparedStatement ps = database.getConnection().prepareStatement(sql);
+                 ResultSet resultSet = ps.executeQuery())  {
 
                 while (resultSet.next()) {
                     String name = resultSet.getString("name");
@@ -110,9 +111,8 @@ public class DatabaseQueryService {
                     Files.readAllLines(Paths.get(initDbFilename))
             );
 
-
-            try (Statement statement = database.getConnection().createStatement();
-                 ResultSet resultSet = statement.executeQuery(sql)) {
+            try (PreparedStatement ps = database.getConnection().prepareStatement(sql);
+                 ResultSet resultSet = ps.executeQuery())  {
 
                 while (resultSet.next()) {
                     String type = resultSet.getString("type");
@@ -145,8 +145,8 @@ public class DatabaseQueryService {
             );
 
 
-            try (Statement statement = database.getConnection().createStatement();
-                 ResultSet resultSet = statement.executeQuery(sql)) {
+            try  (PreparedStatement ps = database.getConnection().prepareStatement(sql);
+                 ResultSet resultSet = ps.executeQuery())  {
 
                 while (resultSet.next()) {
                     String name = resultSet.getString("name");

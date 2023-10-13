@@ -5,7 +5,6 @@ public class Main {
         Database database = Database.getInstance();
 
         DatabaseQueryService databaseQueryService = new DatabaseQueryService(database);
-        System.out.println("databaseQueryService.printProjectPrices() = " + databaseQueryService.printProjectPrices());
         System.out.println("databaseQueryService.findLongestProject() = " + databaseQueryService.findLongestProject());
         System.out.println("databaseQueryService.findMaxSalaryWorker() = " + databaseQueryService.findMaxSalaryWorker());
         System.out.println("databaseQueryService.findMaxProjectsClient() = " + databaseQueryService.findMaxProjectsClient());

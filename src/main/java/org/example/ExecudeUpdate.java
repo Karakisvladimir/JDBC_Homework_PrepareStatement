@@ -1,19 +1,19 @@
 package org.example;
 
-import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
-
 
 
 public class ExecudeUpdate {
 
     public static int executeUpdate(String sql) {
 
-        try (Statement st = Database.getConnection().createStatement()) {
-            return st.executeUpdate(sql);
+        try (PreparedStatement ps = Database.getConnection().prepareStatement(sql)) {
+            return ps.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
             return -1;
         }
     }
 }
+
