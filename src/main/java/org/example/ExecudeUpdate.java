@@ -1,7 +1,6 @@
 package org.example;
 
 import java.sql.PreparedStatement;
-import java.sql.Statement;
 
 
 public class ExecudeUpdate {

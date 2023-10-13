@@ -9,7 +9,6 @@ import java.nio.file.Paths;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,7 +99,7 @@ public class DatabaseQueryService {
         }
         return result;
     }
-//інший засіб ведення путі через джойни та використання константи
+//інший засіб ведення путі через Gson file та використання константи
     public List<YoungestEldestWorkers> findYoungestEldestWorkers() {
         List<YoungestEldestWorkers> result = new ArrayList<>();
 
@@ -133,7 +132,7 @@ public class DatabaseQueryService {
         System.out.println(result);
         return result;
     }
-    //інший засіб ведення путі через джойни та використання константи
+    //інший засіб ведення путі через Gson file та використання константи
     public List<PriceProject> printProjectPrices() {
         List<PriceProject> result = new ArrayList<>();
 
