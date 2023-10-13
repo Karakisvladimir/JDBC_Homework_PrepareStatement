@@ -3,7 +3,6 @@ package org.example;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.Statement;
 
 public class Database {
     private static final Database INSTANCE = new Database();
@@ -23,14 +22,6 @@ public class Database {
         return INSTANCE;
     }
 
-    public int executeUpdate(String sql) {
-        try (Statement st = connection.createStatement()) {
-            return st.executeUpdate(sql);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return -1;
-        }
-    }
 
     public Connection getConnection() {
         return connection;

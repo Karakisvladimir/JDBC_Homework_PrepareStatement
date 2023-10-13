@@ -129,8 +129,8 @@ public class DatabaseQueryService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String n = result.toString();
-        System.out.println(n);
+
+        System.out.println(result);
         return result;
     }
     //інший засіб ведення путі через джойни та використання константи
@@ -162,8 +162,8 @@ public class DatabaseQueryService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String n = result.toString();
-        System.out.println(n);
+
+        System.out.println(result);
         return result;
 
     }

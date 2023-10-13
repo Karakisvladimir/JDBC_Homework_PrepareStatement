@@ -11,7 +11,7 @@ public class DatabasePopulateService {
         String insertSQL = String.format(
                 "INSERT INTO client(name) VALUES('%s')",
                 "Vasiy Rybkin");
-        database.executeUpdate(insertSQL);
+        ExecudeUpdate.executeUpdate(insertSQL);
     }
 
     public void initDB(Database database) {
@@ -22,7 +22,7 @@ public class DatabasePopulateService {
                     Files.readAllLines(Paths.get(initDbFilename))
             );
 
-            database.executeUpdate(sql);
+            ExecudeUpdate.executeUpdate(sql);
 
         } catch (IOException e) {
             throw new RuntimeException(e);

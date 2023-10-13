@@ -12,15 +12,6 @@ public class DataBaseInitService  {
         new DataBaseInitService().initDB(database);
     }
 
-    public static int executeUpdate(Statement st, String sql) {
-        try {
-            return st.executeUpdate(sql);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return -1;
-        }
-    }
-
 
     public void initDB(Database database) {
         try {
@@ -29,8 +20,8 @@ public class DataBaseInitService  {
                     "\n",
                     Files.readAllLines(Paths.get(initDbFilename))
             );
+ExecudeUpdate.executeUpdate(sql);
 
-            database.executeUpdate(sql);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
